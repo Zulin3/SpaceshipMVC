@@ -1,4 +1,7 @@
 ﻿using Assets.Scripts.Data;
+using Assets.Scripts.Enemies;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Player;
 using UnityEngine;
 
 public class GameController : MonoBehaviour

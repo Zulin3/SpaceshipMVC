@@ -22,5 +22,10 @@ namespace Assets.Scripts.Ship
             Vector3 movement = new Vector3(horizontal, vertical, 0.0f);
             _rb.AddForce(movement * deltaTime * _speed);
         }
+
+        public void MoveForward(float deltaTime)
+        {
+            _rb.AddForce(_shipTransform.forward * deltaTime * _speed);
+        }
     }
 }

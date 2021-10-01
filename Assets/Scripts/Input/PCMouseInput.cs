@@ -8,6 +8,12 @@ public sealed class PCMouseInput : IUserMouseInputProxy
     }
 
     public event Action<float, float> OnMouseMove = delegate (float x, float y) { };
+    public event Action OnMouseClick = delegate () { };
+
+    public void InvokeOnMouseClick()
+    {
+        OnMouseClick.Invoke();
+    }
 
     public void InvokeOnMouseMove()
     {

@@ -22,5 +22,10 @@ namespace Assets.Scripts.Ship
             _transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         }
+
+        public void RotateOn(float degs)
+        {
+            _transform.Rotate(new Vector3(0.0f, 0.0f, degs));
+        }
     }
 }

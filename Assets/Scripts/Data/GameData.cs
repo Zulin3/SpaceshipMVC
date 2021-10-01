@@ -12,8 +12,17 @@ namespace Assets.Scripts.Data
     public sealed class GameData: ScriptableObject
     {
         [SerializeField] private string _playerDataPath;
+        [SerializeField] private string _asteroidDataPath;
+        [SerializeField] private string _cometDataPath;
 
         private PlayerData _player;
+        private AsteroidData _asteroid;
+        private CometData _comet;
+
+        [SerializeField] private Vector2 _leftTopAngle;
+        [SerializeField] private Vector2 _rightBottomAngle;
+        [SerializeField] private float _waveDuration;
+        [SerializeField] private float _spawnDelay;
 
         public PlayerData Player
         {
@@ -25,6 +34,32 @@ namespace Assets.Scripts.Data
                 }
 
                 return _player;
+            }
+        }
+
+        public AsteroidData Asteroid
+        {
+            get
+            {
+                if (_asteroid == null)
+                {
+                    _asteroid = Load<AsteroidData>("Data/" + _asteroidDataPath);
+                }
+
+                return _asteroid;
+            }
+        }
+
+        public CometData Comet
+        {
+            get
+            {
+                if (_comet == null)
+                {
+                    _comet = Load<CometData>("Data/" + _cometDataPath);
+                }
+
+                return _comet;
             }
         }
 
