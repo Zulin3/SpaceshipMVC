@@ -31,6 +31,10 @@ internal sealed class InputController: IExecute
         _userPcInputHorizontal.InvokeAxisChange();
         _userPcInputVertical.InvokeAxisChange();
         _mouseInput.InvokeOnMouseMove();
+        if (Input.GetButtonDown(AxisManager.FIRE1))
+        {
+            _mouseInput.InvokeOnMouseClick();
+        }
     }
 
     public void Initialize()

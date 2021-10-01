@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   _playerDataPath: PlayerData
+  _asteroidDataPath: AsteroidData
+  _cometDataPath: CometData
+  _leftTopAngle: {x: -5, y: -5}
+  _rightBottomAngle: {x: 5, y: 5}
+  _waveDuration: 10
+  _spawnDelay: 1

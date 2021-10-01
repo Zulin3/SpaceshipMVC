@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Data;
+﻿using Assets.Scripts.Bullets;
+using Assets.Scripts.Data;
 using Assets.Scripts.Ship;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ internal sealed class PlayerController : IExecute, IFixedExecute, IInitializatio
     private IUserInputProxy _inputVertical;
     private MovementType _movementType;
     private IUserMouseInputProxy _inputMouse;
+    private BulletPool _bulletPool;
 
     private float _vertical;
     private float _horizontal;
@@ -18,23 +20,31 @@ internal sealed class PlayerController : IExecute, IFixedExecute, IInitializatio
     private float _mouseX;
     private float _mouseY;
 
-    public PlayerController(IPlayerFactory playerFactory, Vector2 position, (IUserInputProxy inputHorizontal, IUserInputProxy inputVertical) input, IUserMouseInputProxy inputMouse, PlayerData playerData)
+    public PlayerController(IPlayerFactory playerFactory, BulletPool bulletPool, (IUserInputProxy inputHorizontal, IUserInputProxy inputVertical) input, IUserMouseInputProxy inputMouse, PlayerData playerData)
     {
+        var position = playerData.Position;
         _playerFactory = playerFactory;
         _player = _playerFactory.CreatePlayer();
         _player.position = position;
         _inputHorizontal = input.inputHorizontal;
         _inputVertical = input.inputVertical;
         _movementType = playerData.MovementType;
+        _bulletPool = bulletPool;
 
         _inputMouse = inputMouse;
 
-        _ship = new Ship(_player, playerData.Speed, _movementType);
+        _ship = new Ship(_player, bulletPool, playerData.Speed, _movementType, playerData.ColliderRadius, playerData.BulletSpeed, playerData.BulletDamage);
 
         _inputHorizontal.AxisOnChange += HorizontalAxisOnChange;
         _inputVertical.AxisOnChange += VerticalAxisOnChange;
 
         _inputMouse.OnMouseMove += MouseXOnChange;
+        _inputMouse.OnMouseClick += FireBullet;
+    }
+
+    private void FireBullet()
+    {
+        _ship.Fire();
     }
 
     private void MouseXOnChange(float mouseX, float mouseY)

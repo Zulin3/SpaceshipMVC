@@ -25,5 +25,11 @@ namespace Assets.Scripts.Ship
             _move.Set(horizontal * speed, vertical * speed, 0.0f);
             _transform.localPosition += _move;
         }
+
+        public void MoveForward(float deltaTime)
+        {
+            _move = _transform.right * Speed * deltaTime;
+            _transform.localPosition += _move;
+        }
     }
 }

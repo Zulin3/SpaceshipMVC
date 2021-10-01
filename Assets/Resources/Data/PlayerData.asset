@@ -17,3 +17,7 @@ MonoBehaviour:
   _position: {x: 0, y: 0}
   _scale: 0.1
   _movementType: 1
+  _colliderRadius: 10
+  _bulletSpeed: 5
+  _bulletDamage: 5
+  _maxBullets: 5
